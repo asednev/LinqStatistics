@@ -62,10 +62,17 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
+            var minMax = source.MinMax();
 
-            return source.AssignBins(binCount, mode);
+            var bins = BinFactory.CreateBins((double)minMax.Min, (double)minMax.Max, binCount, mode);
+
+            foreach (var value in source)
+            {
+                var bin = bins.First(b => b.Contains((double)value));
+                bin.Count++;
+            }
+
+            return bins;
         }
 
         /// <summary>
@@ -79,9 +86,6 @@ namespace LinqStatistics
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
 
             return source.AllValues().Histogram(binCount, mode);
         }
@@ -104,9 +108,6 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
 
@@ -128,27 +129,8 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
-
-        private static IEnumerable<Bin> AssignBins(this IEnumerable<<#= type #>> source, int binCount, BinningMode mode) 
-        { 
-            var minMax = source.MinMax();
-
-            var bins = BinFactory.CreateBins((double)minMax.Min, (double)minMax.Max, binCount, mode);
-
-            foreach (var value in source)
-            {
-                var bin = bins.First(b => b.Contains((double)value));
-                bin.Count++;
-            }
-
-            return bins;
-        }
-
         <# } #>
     }
 }

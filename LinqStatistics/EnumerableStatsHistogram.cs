@@ -48,10 +48,17 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
+            var minMax = source.MinMax();
 
-            return source.AssignBins(binCount, mode);
+            var bins = BinFactory.CreateBins((double)minMax.Min, (double)minMax.Max, binCount, mode);
+
+            foreach (var value in source)
+            {
+                var bin = bins.First(b => b.Contains((double)value));
+                bin.Count++;
+            }
+
+            return bins;
         }
 
         /// <summary>
@@ -65,9 +72,6 @@ namespace LinqStatistics
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
 
             return source.AllValues().Histogram(binCount, mode);
         }
@@ -90,9 +94,6 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
 
@@ -114,14 +115,20 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
+                /// <summary>
+        /// Computes the Histogram of a sequence of long values.
+        /// </summary>
+        /// <param name="source">A sequence of long values to calculate the Histogram of.</param>
+        /// <param name="binCount">The number of bins into which to segregate the data.</param>
+        /// <param name="mode">The method used to determine the range of each bin</param>
+        /// <returns>The Histogram of the sequence of long values.</returns>
+        public static IEnumerable<Bin> Histogram(this IEnumerable<long> source, int binCount, BinningMode mode = BinningMode.Unbounded)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
 
-        private static IEnumerable<Bin> AssignBins(this IEnumerable<int> source, int binCount, BinningMode mode) 
-        { 
             var minMax = source.MinMax();
 
             var bins = BinFactory.CreateBins((double)minMax.Min, (double)minMax.Max, binCount, mode);
@@ -135,24 +142,6 @@ namespace LinqStatistics
             return bins;
         }
 
-                /// <summary>
-        /// Computes the Histogram of a sequence of long values.
-        /// </summary>
-        /// <param name="source">A sequence of long values to calculate the Histogram of.</param>
-        /// <param name="binCount">The number of bins into which to segregate the data.</param>
-        /// <param name="mode">The method used to determine the range of each bin</param>
-        /// <returns>The Histogram of the sequence of long values.</returns>
-        public static IEnumerable<Bin> Histogram(this IEnumerable<long> source, int binCount, BinningMode mode = BinningMode.Unbounded)
-        {
-            if (source == null)
-                throw new ArgumentNullException("source");
-
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            return source.AssignBins(binCount, mode);
-        }
-
         /// <summary>
         /// Computes the Histogram of a sequence of nullable long values.
         /// </summary>
@@ -164,9 +153,6 @@ namespace LinqStatistics
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
 
             return source.AllValues().Histogram(binCount, mode);
         }
@@ -189,9 +175,6 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
 
@@ -213,14 +196,20 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
+                /// <summary>
+        /// Computes the Histogram of a sequence of float values.
+        /// </summary>
+        /// <param name="source">A sequence of float values to calculate the Histogram of.</param>
+        /// <param name="binCount">The number of bins into which to segregate the data.</param>
+        /// <param name="mode">The method used to determine the range of each bin</param>
+        /// <returns>The Histogram of the sequence of float values.</returns>
+        public static IEnumerable<Bin> Histogram(this IEnumerable<float> source, int binCount, BinningMode mode = BinningMode.Unbounded)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
 
-        private static IEnumerable<Bin> AssignBins(this IEnumerable<long> source, int binCount, BinningMode mode) 
-        { 
             var minMax = source.MinMax();
 
             var bins = BinFactory.CreateBins((double)minMax.Min, (double)minMax.Max, binCount, mode);
@@ -234,24 +223,6 @@ namespace LinqStatistics
             return bins;
         }
 
-                /// <summary>
-        /// Computes the Histogram of a sequence of float values.
-        /// </summary>
-        /// <param name="source">A sequence of float values to calculate the Histogram of.</param>
-        /// <param name="binCount">The number of bins into which to segregate the data.</param>
-        /// <param name="mode">The method used to determine the range of each bin</param>
-        /// <returns>The Histogram of the sequence of float values.</returns>
-        public static IEnumerable<Bin> Histogram(this IEnumerable<float> source, int binCount, BinningMode mode = BinningMode.Unbounded)
-        {
-            if (source == null)
-                throw new ArgumentNullException("source");
-
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            return source.AssignBins(binCount, mode);
-        }
-
         /// <summary>
         /// Computes the Histogram of a sequence of nullable float values.
         /// </summary>
@@ -263,9 +234,6 @@ namespace LinqStatistics
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
 
             return source.AllValues().Histogram(binCount, mode);
         }
@@ -288,9 +256,6 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
 
@@ -312,14 +277,20 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
+                /// <summary>
+        /// Computes the Histogram of a sequence of double values.
+        /// </summary>
+        /// <param name="source">A sequence of double values to calculate the Histogram of.</param>
+        /// <param name="binCount">The number of bins into which to segregate the data.</param>
+        /// <param name="mode">The method used to determine the range of each bin</param>
+        /// <returns>The Histogram of the sequence of double values.</returns>
+        public static IEnumerable<Bin> Histogram(this IEnumerable<double> source, int binCount, BinningMode mode = BinningMode.Unbounded)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
 
-        private static IEnumerable<Bin> AssignBins(this IEnumerable<float> source, int binCount, BinningMode mode) 
-        { 
             var minMax = source.MinMax();
 
             var bins = BinFactory.CreateBins((double)minMax.Min, (double)minMax.Max, binCount, mode);
@@ -333,24 +304,6 @@ namespace LinqStatistics
             return bins;
         }
 
-                /// <summary>
-        /// Computes the Histogram of a sequence of double values.
-        /// </summary>
-        /// <param name="source">A sequence of double values to calculate the Histogram of.</param>
-        /// <param name="binCount">The number of bins into which to segregate the data.</param>
-        /// <param name="mode">The method used to determine the range of each bin</param>
-        /// <returns>The Histogram of the sequence of double values.</returns>
-        public static IEnumerable<Bin> Histogram(this IEnumerable<double> source, int binCount, BinningMode mode = BinningMode.Unbounded)
-        {
-            if (source == null)
-                throw new ArgumentNullException("source");
-
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            return source.AssignBins(binCount, mode);
-        }
-
         /// <summary>
         /// Computes the Histogram of a sequence of nullable double values.
         /// </summary>
@@ -362,9 +315,6 @@ namespace LinqStatistics
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
 
             return source.AllValues().Histogram(binCount, mode);
         }
@@ -387,9 +337,6 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
 
@@ -411,14 +358,20 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
+                /// <summary>
+        /// Computes the Histogram of a sequence of decimal values.
+        /// </summary>
+        /// <param name="source">A sequence of decimal values to calculate the Histogram of.</param>
+        /// <param name="binCount">The number of bins into which to segregate the data.</param>
+        /// <param name="mode">The method used to determine the range of each bin</param>
+        /// <returns>The Histogram of the sequence of decimal values.</returns>
+        public static IEnumerable<Bin> Histogram(this IEnumerable<decimal> source, int binCount, BinningMode mode = BinningMode.Unbounded)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
 
-        private static IEnumerable<Bin> AssignBins(this IEnumerable<double> source, int binCount, BinningMode mode) 
-        { 
             var minMax = source.MinMax();
 
             var bins = BinFactory.CreateBins((double)minMax.Min, (double)minMax.Max, binCount, mode);
@@ -432,24 +385,6 @@ namespace LinqStatistics
             return bins;
         }
 
-                /// <summary>
-        /// Computes the Histogram of a sequence of decimal values.
-        /// </summary>
-        /// <param name="source">A sequence of decimal values to calculate the Histogram of.</param>
-        /// <param name="binCount">The number of bins into which to segregate the data.</param>
-        /// <param name="mode">The method used to determine the range of each bin</param>
-        /// <returns>The Histogram of the sequence of decimal values.</returns>
-        public static IEnumerable<Bin> Histogram(this IEnumerable<decimal> source, int binCount, BinningMode mode = BinningMode.Unbounded)
-        {
-            if (source == null)
-                throw new ArgumentNullException("source");
-
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            return source.AssignBins(binCount, mode);
-        }
-
         /// <summary>
         /// Computes the Histogram of a sequence of nullable decimal values.
         /// </summary>
@@ -461,9 +396,6 @@ namespace LinqStatistics
         {
             if (source == null)
                 throw new ArgumentNullException("source");
-
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
 
             return source.AllValues().Histogram(binCount, mode);
         }
@@ -486,9 +418,6 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
 
@@ -510,26 +439,7 @@ namespace LinqStatistics
             if (selector == null)
                 throw new ArgumentNullException("selector");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             return source.Select(t => selector(t)).Histogram(binCount, mode);
         }
-
-        private static IEnumerable<Bin> AssignBins(this IEnumerable<decimal> source, int binCount, BinningMode mode) 
-        { 
-            var minMax = source.MinMax();
-
-            var bins = BinFactory.CreateBins((double)minMax.Min, (double)minMax.Max, binCount, mode);
-
-            foreach (var value in source)
-            {
-                var bin = bins.First(b => b.Contains((double)value));
-                bin.Count++;
-            }
-
-            return bins;
-        }
-
             }
 }

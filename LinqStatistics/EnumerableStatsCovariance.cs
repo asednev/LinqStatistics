@@ -20,7 +20,7 @@ namespace LinqStatistics
         /// <returns>The Covariance of the two sequence of values.</returns>
         public static double? Covariance(this IEnumerable<int?> source, IEnumerable<int?> other)
         {
-            IEnumerable<int> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Covariance(other.AllValues());
 
@@ -41,12 +41,6 @@ namespace LinqStatistics
             if (other == null)
                 throw new ArgumentNullException("other");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            if (!other.Any())
-                throw new InvalidOperationException("other sequence contains no elements");
-
             // convert to lists so we can get items by index without enumerating within the loop below
             var listSource = source.ToList();
             var listOther = other.ToList();
@@ -58,13 +52,17 @@ namespace LinqStatistics
             var avgOther = listOther.Average();
             
             double covariance = 0;
-            int n = listSource.Count;
-            for (int i = 0; i < n; i++)
+            checked
             {
-                covariance += (double)((listSource[i] - avgSource) * (listOther[i] - avgOther));
+                for (int i = 0; i < listSource.Count; i++)
+                {
+                    covariance += (listSource[i] - avgSource) * (listOther[i] - avgOther);
+                }
             }
 
-            return (double)(covariance / n); 
+            // Average (above) will except on empty lists so we don't need to check for divide by zero here
+            // Also can just use one list's count since we check that both are of the same length
+            return covariance / listSource.Count; 
         }               
  	
         /// <summary>
@@ -75,7 +73,7 @@ namespace LinqStatistics
         /// <returns>The Covariance of the two sequence of values.</returns>
         public static double? Covariance(this IEnumerable<long?> source, IEnumerable<long?> other)
         {
-            IEnumerable<long> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Covariance(other.AllValues());
 
@@ -96,12 +94,6 @@ namespace LinqStatistics
             if (other == null)
                 throw new ArgumentNullException("other");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            if (!other.Any())
-                throw new InvalidOperationException("other sequence contains no elements");
-
             // convert to lists so we can get items by index without enumerating within the loop below
             var listSource = source.ToList();
             var listOther = other.ToList();
@@ -113,13 +105,17 @@ namespace LinqStatistics
             var avgOther = listOther.Average();
             
             double covariance = 0;
-            int n = listSource.Count;
-            for (int i = 0; i < n; i++)
+            checked
             {
-                covariance += (double)((listSource[i] - avgSource) * (listOther[i] - avgOther));
+                for (int i = 0; i < listSource.Count; i++)
+                {
+                    covariance += (listSource[i] - avgSource) * (listOther[i] - avgOther);
+                }
             }
 
-            return (double)(covariance / n); 
+            // Average (above) will except on empty lists so we don't need to check for divide by zero here
+            // Also can just use one list's count since we check that both are of the same length
+            return covariance / listSource.Count; 
         }               
  	
         /// <summary>
@@ -130,7 +126,7 @@ namespace LinqStatistics
         /// <returns>The Covariance of the two sequence of values.</returns>
         public static decimal? Covariance(this IEnumerable<decimal?> source, IEnumerable<decimal?> other)
         {
-            IEnumerable<decimal> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Covariance(other.AllValues());
 
@@ -151,12 +147,6 @@ namespace LinqStatistics
             if (other == null)
                 throw new ArgumentNullException("other");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            if (!other.Any())
-                throw new InvalidOperationException("other sequence contains no elements");
-
             // convert to lists so we can get items by index without enumerating within the loop below
             var listSource = source.ToList();
             var listOther = other.ToList();
@@ -167,14 +157,18 @@ namespace LinqStatistics
             var avgSource = listSource.Average();
             var avgOther = listOther.Average();
             
-            double covariance = 0;
-            int n = listSource.Count;
-            for (int i = 0; i < n; i++)
+            decimal covariance = 0;
+            checked
             {
-                covariance += (double)((listSource[i] - avgSource) * (listOther[i] - avgOther));
+                for (int i = 0; i < listSource.Count; i++)
+                {
+                    covariance += (listSource[i] - avgSource) * (listOther[i] - avgOther);
+                }
             }
 
-            return (decimal)(covariance / n); 
+            // Average (above) will except on empty lists so we don't need to check for divide by zero here
+            // Also can just use one list's count since we check that both are of the same length
+            return covariance / listSource.Count; 
         }               
  	
         /// <summary>
@@ -185,7 +179,7 @@ namespace LinqStatistics
         /// <returns>The Covariance of the two sequence of values.</returns>
         public static float? Covariance(this IEnumerable<float?> source, IEnumerable<float?> other)
         {
-            IEnumerable<float> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Covariance(other.AllValues());
 
@@ -206,12 +200,6 @@ namespace LinqStatistics
             if (other == null)
                 throw new ArgumentNullException("other");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            if (!other.Any())
-                throw new InvalidOperationException("other sequence contains no elements");
-
             // convert to lists so we can get items by index without enumerating within the loop below
             var listSource = source.ToList();
             var listOther = other.ToList();
@@ -222,14 +210,18 @@ namespace LinqStatistics
             var avgSource = listSource.Average();
             var avgOther = listOther.Average();
             
-            double covariance = 0;
-            int n = listSource.Count;
-            for (int i = 0; i < n; i++)
+            float covariance = 0;
+            checked
             {
-                covariance += (double)((listSource[i] - avgSource) * (listOther[i] - avgOther));
+                for (int i = 0; i < listSource.Count; i++)
+                {
+                    covariance += (listSource[i] - avgSource) * (listOther[i] - avgOther);
+                }
             }
 
-            return (float)(covariance / n); 
+            // Average (above) will except on empty lists so we don't need to check for divide by zero here
+            // Also can just use one list's count since we check that both are of the same length
+            return covariance / listSource.Count; 
         }               
  	
         /// <summary>
@@ -240,7 +232,7 @@ namespace LinqStatistics
         /// <returns>The Covariance of the two sequence of values.</returns>
         public static double? Covariance(this IEnumerable<double?> source, IEnumerable<double?> other)
         {
-            IEnumerable<double> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Covariance(other.AllValues());
 
@@ -261,12 +253,6 @@ namespace LinqStatistics
             if (other == null)
                 throw new ArgumentNullException("other");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            if (!other.Any())
-                throw new InvalidOperationException("other sequence contains no elements");
-
             // convert to lists so we can get items by index without enumerating within the loop below
             var listSource = source.ToList();
             var listOther = other.ToList();
@@ -278,13 +264,17 @@ namespace LinqStatistics
             var avgOther = listOther.Average();
             
             double covariance = 0;
-            int n = listSource.Count;
-            for (int i = 0; i < n; i++)
+            checked
             {
-                covariance += (double)((listSource[i] - avgSource) * (listOther[i] - avgOther));
+                for (int i = 0; i < listSource.Count; i++)
+                {
+                    covariance += (listSource[i] - avgSource) * (listOther[i] - avgOther);
+                }
             }
 
-            return (double)(covariance / n); 
+            // Average (above) will except on empty lists so we don't need to check for divide by zero here
+            // Also can just use one list's count since we check that both are of the same length
+            return covariance / listSource.Count; 
         }               
      }
 }

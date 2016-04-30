@@ -19,7 +19,7 @@ namespace LinqStatistics
         /// <returns>The Skewness of the sequence of values.</returns>
         public static double? Skewness(this IEnumerable<int?> source)
         {
-            IEnumerable<int> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Skewness();
 
@@ -36,17 +36,18 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double mean = (double)source.Average();
             double s = (double)source.StandardDeviation();
             double M3 = 0;
-            int n = 0;
-            foreach(var x in source)
-            {
-                n++;
-                M3 += Math.Pow(((double)x - mean) / s, 3.0);
+            long n = 0;
+
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
+                    M3 += Math.Pow(((double)x - mean) / s, 3.0);
+                }
             }
 
             if (n < 3)
@@ -100,7 +101,7 @@ namespace LinqStatistics
         /// <returns>The Skewness of the sequence of values.</returns>
         public static double? Skewness(this IEnumerable<long?> source)
         {
-            IEnumerable<long> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Skewness();
 
@@ -117,17 +118,18 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double mean = (double)source.Average();
             double s = (double)source.StandardDeviation();
             double M3 = 0;
-            int n = 0;
-            foreach(var x in source)
-            {
-                n++;
-                M3 += Math.Pow(((double)x - mean) / s, 3.0);
+            long n = 0;
+
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
+                    M3 += Math.Pow(((double)x - mean) / s, 3.0);
+                }
             }
 
             if (n < 3)
@@ -181,7 +183,7 @@ namespace LinqStatistics
         /// <returns>The Skewness of the sequence of values.</returns>
         public static decimal? Skewness(this IEnumerable<decimal?> source)
         {
-            IEnumerable<decimal> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Skewness();
 
@@ -198,17 +200,18 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double mean = (double)source.Average();
             double s = (double)source.StandardDeviation();
             double M3 = 0;
-            int n = 0;
-            foreach(var x in source)
-            {
-                n++;
-                M3 += Math.Pow(((double)x - mean) / s, 3.0);
+            long n = 0;
+
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
+                    M3 += Math.Pow(((double)x - mean) / s, 3.0);
+                }
             }
 
             if (n < 3)
@@ -262,7 +265,7 @@ namespace LinqStatistics
         /// <returns>The Skewness of the sequence of values.</returns>
         public static float? Skewness(this IEnumerable<float?> source)
         {
-            IEnumerable<float> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Skewness();
 
@@ -279,17 +282,18 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double mean = (double)source.Average();
             double s = (double)source.StandardDeviation();
             double M3 = 0;
-            int n = 0;
-            foreach(var x in source)
-            {
-                n++;
-                M3 += Math.Pow(((double)x - mean) / s, 3.0);
+            long n = 0;
+
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
+                    M3 += Math.Pow(((double)x - mean) / s, 3.0);
+                }
             }
 
             if (n < 3)
@@ -343,7 +347,7 @@ namespace LinqStatistics
         /// <returns>The Skewness of the sequence of values.</returns>
         public static double? Skewness(this IEnumerable<double?> source)
         {
-            IEnumerable<double> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Skewness();
 
@@ -360,17 +364,18 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double mean = (double)source.Average();
             double s = (double)source.StandardDeviation();
             double M3 = 0;
-            int n = 0;
-            foreach(var x in source)
-            {
-                n++;
-                M3 += Math.Pow(((double)x - mean) / s, 3.0);
+            long n = 0;
+
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
+                    M3 += Math.Pow(((double)x - mean) / s, 3.0);
+                }
             }
 
             if (n < 3)

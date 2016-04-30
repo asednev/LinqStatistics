@@ -20,7 +20,7 @@ namespace LinqStatistics
         ///     empty or contains only values that are null.</returns>
         public static LeastSquares? LeastSquares(this IEnumerable<Tuple<int?, int?>> source)
         {
-            IEnumerable<Tuple<int, int>> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.LeastSquares();
 
@@ -37,26 +37,30 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            int n = 0;
+            long n = 0;
             double sumX = 0;
             double sumY = 0;
             double sumXX = 0;
             double sumXY = 0;
 
-            foreach (var tuple in source)
-            {
-                n++;
-                sumX += (double)tuple.Item1;
-                sumY += (double)tuple.Item2;
-                sumXX += (double)(tuple.Item1 * tuple.Item1);
-                sumXY += (double)(tuple.Item1 * tuple.Item2);
+            checked
+            { 
+                foreach (var tuple in source)
+                {
+                    n++;
+                    sumX += (double)tuple.Item1;
+                    sumY += (double)tuple.Item2;
+                    sumXX += (double)(tuple.Item1 * tuple.Item1);
+                    sumXY += (double)(tuple.Item1 * tuple.Item2);
+                }
             }
 
             if (n < 2)
                 throw new InvalidOperationException("Source must have at least 2 elements");
-
-            double b = (-sumX * sumXY + sumXX * sumY) / (n * sumXX - sumX * sumX);
-            double m = (-sumX * sumY + n * sumXY) / (n * sumXX - sumX * sumX);
+            
+            double denominator = (n * sumXX - sumX * sumX);
+            double b = (-sumX * sumXY + sumXX * sumY) / denominator;
+            double m = (-sumX * sumY + n * sumXY) / denominator;
 
             return new LeastSquares(m, b);
         }
@@ -107,7 +111,7 @@ namespace LinqStatistics
         ///     empty or contains only values that are null.</returns>
         public static LeastSquares? LeastSquares(this IEnumerable<Tuple<long?, long?>> source)
         {
-            IEnumerable<Tuple<long, long>> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.LeastSquares();
 
@@ -124,26 +128,30 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            int n = 0;
+            long n = 0;
             double sumX = 0;
             double sumY = 0;
             double sumXX = 0;
             double sumXY = 0;
 
-            foreach (var tuple in source)
-            {
-                n++;
-                sumX += (double)tuple.Item1;
-                sumY += (double)tuple.Item2;
-                sumXX += (double)(tuple.Item1 * tuple.Item1);
-                sumXY += (double)(tuple.Item1 * tuple.Item2);
+            checked
+            { 
+                foreach (var tuple in source)
+                {
+                    n++;
+                    sumX += (double)tuple.Item1;
+                    sumY += (double)tuple.Item2;
+                    sumXX += (double)(tuple.Item1 * tuple.Item1);
+                    sumXY += (double)(tuple.Item1 * tuple.Item2);
+                }
             }
 
             if (n < 2)
                 throw new InvalidOperationException("Source must have at least 2 elements");
-
-            double b = (-sumX * sumXY + sumXX * sumY) / (n * sumXX - sumX * sumX);
-            double m = (-sumX * sumY + n * sumXY) / (n * sumXX - sumX * sumX);
+            
+            double denominator = (n * sumXX - sumX * sumX);
+            double b = (-sumX * sumXY + sumXX * sumY) / denominator;
+            double m = (-sumX * sumY + n * sumXY) / denominator;
 
             return new LeastSquares(m, b);
         }
@@ -194,7 +202,7 @@ namespace LinqStatistics
         ///     empty or contains only values that are null.</returns>
         public static LeastSquares? LeastSquares(this IEnumerable<Tuple<float?, float?>> source)
         {
-            IEnumerable<Tuple<float, float>> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.LeastSquares();
 
@@ -211,26 +219,30 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            int n = 0;
+            long n = 0;
             double sumX = 0;
             double sumY = 0;
             double sumXX = 0;
             double sumXY = 0;
 
-            foreach (var tuple in source)
-            {
-                n++;
-                sumX += (double)tuple.Item1;
-                sumY += (double)tuple.Item2;
-                sumXX += (double)(tuple.Item1 * tuple.Item1);
-                sumXY += (double)(tuple.Item1 * tuple.Item2);
+            checked
+            { 
+                foreach (var tuple in source)
+                {
+                    n++;
+                    sumX += (double)tuple.Item1;
+                    sumY += (double)tuple.Item2;
+                    sumXX += (double)(tuple.Item1 * tuple.Item1);
+                    sumXY += (double)(tuple.Item1 * tuple.Item2);
+                }
             }
 
             if (n < 2)
                 throw new InvalidOperationException("Source must have at least 2 elements");
-
-            double b = (-sumX * sumXY + sumXX * sumY) / (n * sumXX - sumX * sumX);
-            double m = (-sumX * sumY + n * sumXY) / (n * sumXX - sumX * sumX);
+            
+            double denominator = (n * sumXX - sumX * sumX);
+            double b = (-sumX * sumXY + sumXX * sumY) / denominator;
+            double m = (-sumX * sumY + n * sumXY) / denominator;
 
             return new LeastSquares(m, b);
         }
@@ -281,7 +293,7 @@ namespace LinqStatistics
         ///     empty or contains only values that are null.</returns>
         public static LeastSquares? LeastSquares(this IEnumerable<Tuple<double?, double?>> source)
         {
-            IEnumerable<Tuple<double, double>> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.LeastSquares();
 
@@ -298,26 +310,30 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            int n = 0;
+            long n = 0;
             double sumX = 0;
             double sumY = 0;
             double sumXX = 0;
             double sumXY = 0;
 
-            foreach (var tuple in source)
-            {
-                n++;
-                sumX += (double)tuple.Item1;
-                sumY += (double)tuple.Item2;
-                sumXX += (double)(tuple.Item1 * tuple.Item1);
-                sumXY += (double)(tuple.Item1 * tuple.Item2);
+            checked
+            { 
+                foreach (var tuple in source)
+                {
+                    n++;
+                    sumX += (double)tuple.Item1;
+                    sumY += (double)tuple.Item2;
+                    sumXX += (double)(tuple.Item1 * tuple.Item1);
+                    sumXY += (double)(tuple.Item1 * tuple.Item2);
+                }
             }
 
             if (n < 2)
                 throw new InvalidOperationException("Source must have at least 2 elements");
-
-            double b = (-sumX * sumXY + sumXX * sumY) / (n * sumXX - sumX * sumX);
-            double m = (-sumX * sumY + n * sumXY) / (n * sumXX - sumX * sumX);
+            
+            double denominator = (n * sumXX - sumX * sumX);
+            double b = (-sumX * sumXY + sumXX * sumY) / denominator;
+            double m = (-sumX * sumY + n * sumXY) / denominator;
 
             return new LeastSquares(m, b);
         }
@@ -368,7 +384,7 @@ namespace LinqStatistics
         ///     empty or contains only values that are null.</returns>
         public static LeastSquares? LeastSquares(this IEnumerable<Tuple<decimal?, decimal?>> source)
         {
-            IEnumerable<Tuple<decimal, decimal>> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.LeastSquares();
 
@@ -385,26 +401,30 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            int n = 0;
+            long n = 0;
             double sumX = 0;
             double sumY = 0;
             double sumXX = 0;
             double sumXY = 0;
 
-            foreach (var tuple in source)
-            {
-                n++;
-                sumX += (double)tuple.Item1;
-                sumY += (double)tuple.Item2;
-                sumXX += (double)(tuple.Item1 * tuple.Item1);
-                sumXY += (double)(tuple.Item1 * tuple.Item2);
+            checked
+            { 
+                foreach (var tuple in source)
+                {
+                    n++;
+                    sumX += (double)tuple.Item1;
+                    sumY += (double)tuple.Item2;
+                    sumXX += (double)(tuple.Item1 * tuple.Item1);
+                    sumXY += (double)(tuple.Item1 * tuple.Item2);
+                }
             }
 
             if (n < 2)
                 throw new InvalidOperationException("Source must have at least 2 elements");
-
-            double b = (-sumX * sumXY + sumXX * sumY) / (n * sumXX - sumX * sumX);
-            double m = (-sumX * sumY + n * sumXY) / (n * sumXX - sumX * sumX);
+            
+            double denominator = (n * sumXX - sumX * sumX);
+            double b = (-sumX * sumXY + sumXX * sumY) / denominator;
+            double m = (-sumX * sumY + n * sumXY) / denominator;
 
             return new LeastSquares(m, b);
         }

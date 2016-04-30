@@ -22,7 +22,7 @@ namespace LinqStatistics
         /// </returns>
         public static double? VarianceP(this IEnumerable<int?> source)
         {
-            IEnumerable<int> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.VarianceP();
             
@@ -41,21 +41,24 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            int n = 0;
+            long n = 0;
             double mean = 0;
             double M2 = 0;
 
-            foreach (var x in source)
-            {
-                n++;
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
                 
-                double delta = (double)x - mean;
-                mean += delta / n;
-                M2 += delta * ((double)x - mean);
+                    double delta = (double)x - mean;
+                    mean += delta / n;
+                    M2 += delta * ((double)x - mean);
+                }
             }
+
+            if (n < 1)
+                throw new InvalidOperationException("source sequence contains no elements");
 
             return (double)(M2 / n);
         }
@@ -112,7 +115,7 @@ namespace LinqStatistics
         /// </returns>
         public static double? VarianceP(this IEnumerable<long?> source)
         {
-            IEnumerable<long> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.VarianceP();
             
@@ -131,21 +134,24 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            int n = 0;
+            long n = 0;
             double mean = 0;
             double M2 = 0;
 
-            foreach (var x in source)
-            {
-                n++;
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
                 
-                double delta = (double)x - mean;
-                mean += delta / n;
-                M2 += delta * ((double)x - mean);
+                    double delta = (double)x - mean;
+                    mean += delta / n;
+                    M2 += delta * ((double)x - mean);
+                }
             }
+
+            if (n < 1)
+                throw new InvalidOperationException("source sequence contains no elements");
 
             return (double)(M2 / n);
         }
@@ -202,7 +208,7 @@ namespace LinqStatistics
         /// </returns>
         public static decimal? VarianceP(this IEnumerable<decimal?> source)
         {
-            IEnumerable<decimal> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.VarianceP();
             
@@ -221,21 +227,24 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            int n = 0;
+            long n = 0;
             double mean = 0;
             double M2 = 0;
 
-            foreach (var x in source)
-            {
-                n++;
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
                 
-                double delta = (double)x - mean;
-                mean += delta / n;
-                M2 += delta * ((double)x - mean);
+                    double delta = (double)x - mean;
+                    mean += delta / n;
+                    M2 += delta * ((double)x - mean);
+                }
             }
+
+            if (n < 1)
+                throw new InvalidOperationException("source sequence contains no elements");
 
             return (decimal)(M2 / n);
         }
@@ -292,7 +301,7 @@ namespace LinqStatistics
         /// </returns>
         public static float? VarianceP(this IEnumerable<float?> source)
         {
-            IEnumerable<float> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.VarianceP();
             
@@ -311,21 +320,24 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            int n = 0;
+            long n = 0;
             double mean = 0;
             double M2 = 0;
 
-            foreach (var x in source)
-            {
-                n++;
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
                 
-                double delta = (double)x - mean;
-                mean += delta / n;
-                M2 += delta * ((double)x - mean);
+                    double delta = (double)x - mean;
+                    mean += delta / n;
+                    M2 += delta * ((double)x - mean);
+                }
             }
+
+            if (n < 1)
+                throw new InvalidOperationException("source sequence contains no elements");
 
             return (float)(M2 / n);
         }
@@ -382,7 +394,7 @@ namespace LinqStatistics
         /// </returns>
         public static double? VarianceP(this IEnumerable<double?> source)
         {
-            IEnumerable<double> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.VarianceP();
             
@@ -401,21 +413,24 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
-            int n = 0;
+            long n = 0;
             double mean = 0;
             double M2 = 0;
 
-            foreach (var x in source)
-            {
-                n++;
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
                 
-                double delta = (double)x - mean;
-                mean += delta / n;
-                M2 += delta * ((double)x - mean);
+                    double delta = (double)x - mean;
+                    mean += delta / n;
+                    M2 += delta * ((double)x - mean);
+                }
             }
+
+            if (n < 1)
+                throw new InvalidOperationException("source sequence contains no elements");
 
             return (double)(M2 / n);
         }

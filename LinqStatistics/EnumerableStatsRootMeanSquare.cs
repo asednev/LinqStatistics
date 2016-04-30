@@ -20,7 +20,7 @@ namespace LinqStatistics
         /// <returns>The RootMeanSquare.</returns>
         public static double? RootMeanSquare(this IEnumerable<int?> source)
         {
-            IEnumerable<int> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.RootMeanSquare();
 
@@ -37,17 +37,20 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double s = 0;
-            int n = 0;
+            long n = 0;
 
-            foreach (var d in source)
-            {
-                n++;
-                s += Math.Pow((double)d, 2);
+            checked
+            { 
+                foreach (var d in source)
+                {
+                    n++;
+                    s += Math.Pow((double)d, 2);
+                }
             }
+
+            if (n < 1)
+                throw new InvalidOperationException("source sequence contains no elements");
 
             return (double)Math.Sqrt(s / n);
         }
@@ -98,7 +101,7 @@ namespace LinqStatistics
         /// <returns>The RootMeanSquare.</returns>
         public static double? RootMeanSquare(this IEnumerable<long?> source)
         {
-            IEnumerable<long> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.RootMeanSquare();
 
@@ -115,17 +118,20 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double s = 0;
-            int n = 0;
+            long n = 0;
 
-            foreach (var d in source)
-            {
-                n++;
-                s += Math.Pow((double)d, 2);
+            checked
+            { 
+                foreach (var d in source)
+                {
+                    n++;
+                    s += Math.Pow((double)d, 2);
+                }
             }
+
+            if (n < 1)
+                throw new InvalidOperationException("source sequence contains no elements");
 
             return (double)Math.Sqrt(s / n);
         }
@@ -176,7 +182,7 @@ namespace LinqStatistics
         /// <returns>The RootMeanSquare.</returns>
         public static decimal? RootMeanSquare(this IEnumerable<decimal?> source)
         {
-            IEnumerable<decimal> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.RootMeanSquare();
 
@@ -193,17 +199,20 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double s = 0;
-            int n = 0;
+            long n = 0;
 
-            foreach (var d in source)
-            {
-                n++;
-                s += Math.Pow((double)d, 2);
+            checked
+            { 
+                foreach (var d in source)
+                {
+                    n++;
+                    s += Math.Pow((double)d, 2);
+                }
             }
+
+            if (n < 1)
+                throw new InvalidOperationException("source sequence contains no elements");
 
             return (decimal)Math.Sqrt(s / n);
         }
@@ -254,7 +263,7 @@ namespace LinqStatistics
         /// <returns>The RootMeanSquare.</returns>
         public static float? RootMeanSquare(this IEnumerable<float?> source)
         {
-            IEnumerable<float> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.RootMeanSquare();
 
@@ -271,17 +280,20 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double s = 0;
-            int n = 0;
+            long n = 0;
 
-            foreach (var d in source)
-            {
-                n++;
-                s += Math.Pow((double)d, 2);
+            checked
+            { 
+                foreach (var d in source)
+                {
+                    n++;
+                    s += Math.Pow((double)d, 2);
+                }
             }
+
+            if (n < 1)
+                throw new InvalidOperationException("source sequence contains no elements");
 
             return (float)Math.Sqrt(s / n);
         }
@@ -332,7 +344,7 @@ namespace LinqStatistics
         /// <returns>The RootMeanSquare.</returns>
         public static double? RootMeanSquare(this IEnumerable<double?> source)
         {
-            IEnumerable<double> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.RootMeanSquare();
 
@@ -349,17 +361,20 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double s = 0;
-            int n = 0;
+            long n = 0;
 
-            foreach (var d in source)
-            {
-                n++;
-                s += Math.Pow((double)d, 2);
+            checked
+            { 
+                foreach (var d in source)
+                {
+                    n++;
+                    s += Math.Pow((double)d, 2);
+                }
             }
+
+            if (n < 1)
+                throw new InvalidOperationException("source sequence contains no elements");
 
             return (double)Math.Sqrt(s / n);
         }

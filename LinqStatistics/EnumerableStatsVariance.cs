@@ -22,7 +22,7 @@ namespace LinqStatistics
         /// </returns>
         public static double? Variance(this IEnumerable<int?> source)
         {
-            IEnumerable<int> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Variance();
             
@@ -41,17 +41,20 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            int n = 0;
+            long n = 0;
             double mean = 0;
             double M2 = 0;
 
-            foreach (var x in source)
-            {
-                n++;
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
                 
-                double delta = (double)x - mean;
-                mean += delta / n;
-                M2 += delta * ((double)x - mean);
+                    double delta = (double)x - mean;
+                    mean += delta / n;
+                    M2 += delta * ((double)x - mean);
+                }
             }
 
             if (n < 2)
@@ -112,7 +115,7 @@ namespace LinqStatistics
         /// </returns>
         public static double? Variance(this IEnumerable<long?> source)
         {
-            IEnumerable<long> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Variance();
             
@@ -131,17 +134,20 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            int n = 0;
+            long n = 0;
             double mean = 0;
             double M2 = 0;
 
-            foreach (var x in source)
-            {
-                n++;
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
                 
-                double delta = (double)x - mean;
-                mean += delta / n;
-                M2 += delta * ((double)x - mean);
+                    double delta = (double)x - mean;
+                    mean += delta / n;
+                    M2 += delta * ((double)x - mean);
+                }
             }
 
             if (n < 2)
@@ -202,7 +208,7 @@ namespace LinqStatistics
         /// </returns>
         public static decimal? Variance(this IEnumerable<decimal?> source)
         {
-            IEnumerable<decimal> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Variance();
             
@@ -221,17 +227,20 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            int n = 0;
+            long n = 0;
             double mean = 0;
             double M2 = 0;
 
-            foreach (var x in source)
-            {
-                n++;
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
                 
-                double delta = (double)x - mean;
-                mean += delta / n;
-                M2 += delta * ((double)x - mean);
+                    double delta = (double)x - mean;
+                    mean += delta / n;
+                    M2 += delta * ((double)x - mean);
+                }
             }
 
             if (n < 2)
@@ -292,7 +301,7 @@ namespace LinqStatistics
         /// </returns>
         public static float? Variance(this IEnumerable<float?> source)
         {
-            IEnumerable<float> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Variance();
             
@@ -311,17 +320,20 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            int n = 0;
+            long n = 0;
             double mean = 0;
             double M2 = 0;
 
-            foreach (var x in source)
-            {
-                n++;
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
                 
-                double delta = (double)x - mean;
-                mean += delta / n;
-                M2 += delta * ((double)x - mean);
+                    double delta = (double)x - mean;
+                    mean += delta / n;
+                    M2 += delta * ((double)x - mean);
+                }
             }
 
             if (n < 2)
@@ -382,7 +394,7 @@ namespace LinqStatistics
         /// </returns>
         public static double? Variance(this IEnumerable<double?> source)
         {
-            IEnumerable<double> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Variance();
             
@@ -401,17 +413,20 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            int n = 0;
+            long n = 0;
             double mean = 0;
             double M2 = 0;
 
-            foreach (var x in source)
-            {
-                n++;
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
                 
-                double delta = (double)x - mean;
-                mean += delta / n;
-                M2 += delta * ((double)x - mean);
+                    double delta = (double)x - mean;
+                    mean += delta / n;
+                    M2 += delta * ((double)x - mean);
+                }
             }
 
             if (n < 2)

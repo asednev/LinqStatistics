@@ -19,7 +19,7 @@ namespace LinqStatistics
         /// <returns>The Kurtosis of the sequence of values.</returns>
         public static double? Kurtosis(this IEnumerable<int?> source)
         {
-            IEnumerable<int> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Kurtosis();
 
@@ -36,24 +36,24 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double mean = (double)source.Average();
 
-            int n = 0;
+            long n = 0;
             double meanv = 0;
             double M2 = 0;
             double M4 = 0;
-             
-            foreach (var x in source)
-            {
-                n++;
+            
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
 
-                double delta = (double)x - meanv;
-                meanv += delta / n;
-                M2 += delta * ((double)x - meanv);
-                M4 += Math.Pow((double)x - mean, 4);
+                    double delta = (double)x - meanv;
+                    meanv += delta / n;
+                    M2 += delta * ((double)x - meanv);
+                    M4 += Math.Pow((double)x - mean, 4);
+                }
             }
 
             if (n < 4)
@@ -113,7 +113,7 @@ namespace LinqStatistics
         /// <returns>The Kurtosis of the sequence of values.</returns>
         public static double? Kurtosis(this IEnumerable<long?> source)
         {
-            IEnumerable<long> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Kurtosis();
 
@@ -130,24 +130,24 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double mean = (double)source.Average();
 
-            int n = 0;
+            long n = 0;
             double meanv = 0;
             double M2 = 0;
             double M4 = 0;
-             
-            foreach (var x in source)
-            {
-                n++;
+            
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
 
-                double delta = (double)x - meanv;
-                meanv += delta / n;
-                M2 += delta * ((double)x - meanv);
-                M4 += Math.Pow((double)x - mean, 4);
+                    double delta = (double)x - meanv;
+                    meanv += delta / n;
+                    M2 += delta * ((double)x - meanv);
+                    M4 += Math.Pow((double)x - mean, 4);
+                }
             }
 
             if (n < 4)
@@ -207,7 +207,7 @@ namespace LinqStatistics
         /// <returns>The Kurtosis of the sequence of values.</returns>
         public static decimal? Kurtosis(this IEnumerable<decimal?> source)
         {
-            IEnumerable<decimal> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Kurtosis();
 
@@ -224,24 +224,24 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double mean = (double)source.Average();
 
-            int n = 0;
+            long n = 0;
             double meanv = 0;
             double M2 = 0;
             double M4 = 0;
-             
-            foreach (var x in source)
-            {
-                n++;
+            
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
 
-                double delta = (double)x - meanv;
-                meanv += delta / n;
-                M2 += delta * ((double)x - meanv);
-                M4 += Math.Pow((double)x - mean, 4);
+                    double delta = (double)x - meanv;
+                    meanv += delta / n;
+                    M2 += delta * ((double)x - meanv);
+                    M4 += Math.Pow((double)x - mean, 4);
+                }
             }
 
             if (n < 4)
@@ -301,7 +301,7 @@ namespace LinqStatistics
         /// <returns>The Kurtosis of the sequence of values.</returns>
         public static float? Kurtosis(this IEnumerable<float?> source)
         {
-            IEnumerable<float> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Kurtosis();
 
@@ -318,24 +318,24 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double mean = (double)source.Average();
 
-            int n = 0;
+            long n = 0;
             double meanv = 0;
             double M2 = 0;
             double M4 = 0;
-             
-            foreach (var x in source)
-            {
-                n++;
+            
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
 
-                double delta = (double)x - meanv;
-                meanv += delta / n;
-                M2 += delta * ((double)x - meanv);
-                M4 += Math.Pow((double)x - mean, 4);
+                    double delta = (double)x - meanv;
+                    meanv += delta / n;
+                    M2 += delta * ((double)x - meanv);
+                    M4 += Math.Pow((double)x - mean, 4);
+                }
             }
 
             if (n < 4)
@@ -395,7 +395,7 @@ namespace LinqStatistics
         /// <returns>The Kurtosis of the sequence of values.</returns>
         public static double? Kurtosis(this IEnumerable<double?> source)
         {
-            IEnumerable<double> values = source.AllValues();
+            var values = source.AllValues();
             if (values.Any())
                 return values.Kurtosis();
 
@@ -412,24 +412,24 @@ namespace LinqStatistics
             if (source == null)
                 throw new ArgumentNullException("source");
 
-            if (!source.Any())
-                throw new InvalidOperationException("source sequence contains no elements");
-
             double mean = (double)source.Average();
 
-            int n = 0;
+            long n = 0;
             double meanv = 0;
             double M2 = 0;
             double M4 = 0;
-             
-            foreach (var x in source)
-            {
-                n++;
+            
+            checked
+            { 
+                foreach (var x in source)
+                {
+                    n++;
 
-                double delta = (double)x - meanv;
-                meanv += delta / n;
-                M2 += delta * ((double)x - meanv);
-                M4 += Math.Pow((double)x - mean, 4);
+                    double delta = (double)x - meanv;
+                    meanv += delta / n;
+                    M2 += delta * ((double)x - meanv);
+                    M4 += Math.Pow((double)x - mean, 4);
+                }
             }
 
             if (n < 4)
@@ -483,22 +483,3 @@ namespace LinqStatistics
         }
      }
 }
-// a single pass implementation 
-            //double M1 = 0, M2 = 0, M3 = 0, M4 = 0;
-
-            //int n = 0;
-            //foreach (var x in source)
-            //{
-            //    int n1 = n;
-            //    n++;
-            //    double delta = x - M1;
-            //    double delta_n = delta / n;
-            //    double delta_n2 = delta_n * delta_n;
-            //    double term1 = delta * delta_n * n1;
-            //    M1 += delta_n;
-            //    M4 += term1 * delta_n2 * (n * n - 3 * n + 3) + 6 * delta_n2 * M2 - 4 * delta_n * M3;
-            //    M3 += term1 * delta_n * (n - 2) - 3 * delta_n * M2;
-            //    M2 += term1;
-            //}
-
-            //return n * M4 / (M2 * M2) - 3.0;
